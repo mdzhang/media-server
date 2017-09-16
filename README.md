@@ -30,6 +30,7 @@ Assumes
         \_ data
             \_ tv
             \_ movies
+            \_ downloads
         \_ config
             \_ plex
         \_ tmp

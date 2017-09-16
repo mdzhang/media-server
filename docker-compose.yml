@@ -25,3 +25,17 @@ services:
       - 5353:5353/udp
       - 1900:1900/udp
     restart: always
+  sickrage:
+    image: linuxserver/sickrage
+    volumes:
+      - ${CONF_DIR}/sickrage:/config
+      - ${DATA_DIR}/tv:/data/tvshows
+      - ${DATA_DIR}/downloads:/downloads
+    env_file:
+      - ./env_files/common.env
+    environment:
+      - PGID
+      - PUID
+    ports:
+      - 8081:8081
+    restart: always
