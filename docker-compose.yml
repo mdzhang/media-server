@@ -39,3 +39,34 @@ services:
     ports:
       - 8081:8081
     restart: always
+  transmission:
+    image: haugene/transmission-openvpn
+    env_file:
+      - ./env_files/common.env
+    environment:
+      - OPENVPN_USERNAME
+      - OPENVPN_PASSWORD
+      - OPENVPN_PROVIDER
+      - OPENVPN_CONFIG=Switzerland
+      - TRANSMISSION_HOME=/config
+      - TRANSMISSION_DOWNLOAD_DIR=/tmp
+      - TRANSMISSION_INCOMPLETE_DIR=/tmp/incomplete
+      - TRANSMISSION_INCOMPLETE_DIR_ENABLED=true
+    extra_hosts:
+      - 0.0.0.0:localhost
+    volumes:
+      - ${CONF_DIR}/transmission:/config
+      - ${TMP_DIR}/transmission:/tmp
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - 9092:9091
+    restart: always
+    privileged: true
+  transmission-proxy:
+    image: haugene/transmission-openvpn-proxy
+    links:
+      - transmission
+    ports:
+      - 8080:8080
