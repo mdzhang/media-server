@@ -70,3 +70,17 @@ services:
       - transmission
     ports:
       - 8080:8080
+  couchpotato:
+    image: linuxserver/couchpotato
+    volumes:
+      - ${CONF_DIR}/couchpotato:/config
+      - ${DATA_DIR}/movies:/movies
+      - ${DATA_DIR}/downloads:/downloads
+    env_file:
+      - ./env_files/common.env
+    environment:
+      - PGID
+      - PUID
+    ports:
+      - 5050:5050
+    restart: always

@@ -32,7 +32,10 @@ Assumes
             \_ movies
             \_ downloads
         \_ config
+            \_ couchpotato
             \_ plex
+            \_ sickrage
+            \_ transmission
         \_ tmp
 ```
 
